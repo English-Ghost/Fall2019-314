@@ -8,10 +8,13 @@ public class Primes {
 	
 	// Pair class implementation.
 	private class Pair<T> {
+		
+		// two peas in a pod
 		T firstPair;
 		T secondPair;
 		
 		
+		// makes output easier
 		@Override
 		public String toString() {
 			return firstPair + "," + secondPair;
@@ -23,6 +26,7 @@ public class Primes {
 	// Member variables for containing out lists of integers, twin primes, hexagon crosses, and the pairs of twin primes that make up the hex crosses.
 	ArrayList<BigInteger> primeList = new ArrayList<BigInteger>();
 	ArrayList<Pair<BigInteger>> pairList = new ArrayList<>();
+	ArrayList<BigInteger> hexList = new ArrayList<BigInteger>();
 	
 	// Add a prime to the prime list if and only iff it is not already in the list. (ignore duplicates)
 	public void addPrime(BigInteger x)
@@ -34,25 +38,27 @@ public class Primes {
 	public void printPrimes()
 	{
 		
+		// goes through the list and prints prime
 		for(int i = 0; i<primeList.size(); i++)
 		{
 			System.out.println(primeList.get(i));
 		}
 		
+		// prints the size of the list
 		System.out.println("Total Primes: " + primeList.size());
-		/*
-		 * for(BigInteger prime: primeList) { System.out.println(prime); }
-		 */
 	}
 		
 	// Output the twin prime list. Each twin prime should be on a separate line with a comma separating them, and the total number of twin primes should be on the following line.
 	public void printTwins()
 	{
+		
+		// goes through the pair list and prints pairs
 		for(int i = 0; i<pairList.size(); i++) 
 		{
 			System.out.println(pairList.get(i));
 		}
 		
+		// prints the size of the pair list
 		System.out.println("Total Twins: " + pairList.size());
 	}
 		
@@ -65,14 +71,18 @@ public class Primes {
 	public void generatePrimes(int count)
 	{
 		
+		// clears the list if it is called again
 		primeList.clear();
 		
+		// starts the find for primes
 		BigInteger newPrime = new BigInteger("0");
 		int i = 0;
 		
+		// until the amount needed
 		while(i<count) 
 		{ 
 			
+			// if newPrime is not 1 then add to list and generate next prime
 			if(newPrime.compareTo(BigInteger.ONE) == 1) 
 			{
 				
@@ -81,7 +91,7 @@ public class Primes {
 				i++;
 				
 			}
-			else 
+			else // just generate next prime
 			{
 				newPrime = newPrime.nextProbablePrime();
 			}
@@ -96,22 +106,29 @@ public class Primes {
 	public void generateTwinPrimes()
 	{
 		
+		pairList.clear();
+		
 		for(int i = 1; i<primeList.size(); i++)
 		{
 			
+			// This is to make the math look prettier and easier to understand
 			BigInteger first = primeList.get(i);
 			BigInteger second = primeList.get(i-1);
 			BigInteger diff = (first).subtract(second);
 			BigInteger bTwo = new BigInteger("2");
 			
-			
+			// if the diff is 2 then its a twin prime
 			if( diff.compareTo(bTwo) == 0)
 			{
+				
+				// create a new pair
 				Pair<BigInteger> newPair = new Pair<BigInteger>();
 				
+				// set values of pair to twin primes
 				newPair.firstPair = primeList.get(i-1);
 				newPair.secondPair = primeList.get(i);
 				
+				// add to the list
 				pairList.add(newPair);
 			}
 			
