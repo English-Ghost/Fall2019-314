@@ -3,6 +3,12 @@ import java.math.BigInteger;
 
 /*
  * Desc: This class generates primes, twin primes, and hexagon crosses using BigInteger data types.
+ * 
+ * Adam Castell
+ * 626004259
+ * Section: 502
+ * 
+ * 
  */
 public class PrimeOperations {
 
