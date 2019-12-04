@@ -35,13 +35,18 @@ public class Primes {
 	// Empties the list of primes.
 	public void clearPrimes()
 	{
+	  primeList.clear();
+	}
 	
+	public void clearTwins()
+	{
+	  twinPrimeList.clear();
 	}
 	
 	// Empties the list of crosses.
 	public void clearCrosses()
 	{
-
+	  crossList.clear();
 	}
 	
 	// Output the prime list. Each prime should be on a separate line and the total number of primes should be on the following line.
@@ -190,7 +195,7 @@ public class Primes {
 	
 	public IterablePrimes iteratePrimes() { return new IterablePrimes();}
 
-	public class IterableCrosses implements Iterable<BigInteger>
+	public class IterableCrosses implements Iterable<Pair<BigInteger>>
 	{
 	  int current;
 	  IterableCrosses()
@@ -214,7 +219,7 @@ public class Primes {
 	  }
 	  
 	  @Override
-	  public Iterator<BigInteger> iterator() {
+	  public Iterator<Pair<BigInteger>> iterator() {
 	    return null;
 	  }
 	}

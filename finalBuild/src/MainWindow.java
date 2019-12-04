@@ -19,18 +19,18 @@ public class MainWindow extends JFrame
 {
 	private static final long serialVersionUID = -3880026026104218593L;
 	private Primes m_Primes;
-	private JTextField tfPrimeFileName;
-	private JTextField tfCrossFileName;
-	private JLabel lblPrimeCount;
-	private JLabel lblCrossCount;
-	private JLabel lblLargestPrime;
-	private JLabel lblLargestCross;
-	private JLabel lblStatus;
+	private JTextField tfPrimeFileName = new JTextField("primes.txt");
+	private JTextField tfCrossFileName = new JTextField("crosses.txt");
+	private JLabel lblPrimeCount = new JLabel("0");
+	private JLabel lblCrossCount = new JLabel("0");
+	private JLabel lblLargestPrime = new JLabel("0");
+	private JLabel lblLargestCross = new JLabel("0");
+	private JLabel lblStatus = new JLabel("Running");
 	
 	MainWindow(String name, Primes p)
 	{
+	  //popupGeneratePrimes();
 	  popupGenerateHex();
-	  // popupGeneratePrimes();
 	  
 	}
 	
@@ -56,21 +56,21 @@ public class MainWindow extends JFrame
       gbcVals2.weightx = .5;
       // gbcVals2.weighty = 1.0;
       // gbcVals2.ipadx = 10;
-      gbcVals2.insets = new Insets(1,0,2,0);
+      gbcVals2.insets = new Insets(0,2,0,0);
       gbcVals2.gridx = 0;
       gbcVals2.gridy = 0;
       
       JPanel pnlGenerate = new JPanel();
       pnlGenerate.setLayout(new GridBagLayout());
 	  
-      JTextField tfPrimeFile = new JTextField("primes.txt");
-      tfPrimeFile.setColumns(40);
+      JTextField tfPrimeFile = new JTextField(tfPrimeFileName.getText());
+      tfPrimeFile.setColumns(55);
       tfPrimeFile.setFont(new Font("Tahoma", Font.PLAIN, 12));
       gbcVals2.gridx = 0;
       gbcVals2.gridy = 0;
       pnlGenerate.add(tfPrimeFile,gbcVals2);
       
-      JLabel amountPrimes = new JLabel("0");
+      JLabel amountPrimes = new JLabel(lblPrimeCount.getText());
       amountPrimes.setFont(new Font("Dialog", Font.BOLD, 12));
       gbcVals2.gridx = 1;
       gbcVals2.anchor = GridBagConstraints.CENTER;
@@ -85,6 +85,21 @@ public class MainWindow extends JFrame
       pnlGenerate.add(primeLabel,gbcVals2);
       
       JButton primeLoad = new JButton("Load");
+      primeLoad.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+          try
+          {
+              lblStatus.setText("Status: Excited. Primes have been generated.");
+              updateStats();
+              nameHexWindow.dispose();
+          }
+          catch(NumberFormatException ex)
+          {
+              lblStatus.setText("There is nothing to load, check the file name or the file.");
+              nameHexWindow.dispose();
+          }
+        }
+      });
       gbcVals2.gridx = 0;
       gbcVals2.gridy = 1;
       gbcVals2.anchor = GridBagConstraints.EAST;
@@ -93,7 +108,21 @@ public class MainWindow extends JFrame
       gbcVals2.anchor = GridBagConstraints.WEST;
       
       JButton primeSave = new JButton("Save");
-      System.out.println(primeSave.getFont());
+      primeSave.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+          try
+          {
+              lblStatus.setText("Status: Excited. Primes have been generated.");
+              updateStats();
+              nameHexWindow.dispose();
+          }
+          catch(NumberFormatException ex)
+          {
+              lblStatus.setText("There is nothing to load, check the file name or the file.");
+              nameHexWindow.dispose();
+          }
+        }
+      });
       gbcVals2.gridx = 1;
       gbcVals2.gridy = 1;
       pnlGenerate.add(primeSave,gbcVals2);
@@ -103,14 +132,14 @@ public class MainWindow extends JFrame
       JPanel pnlGenerate2 = new JPanel();
       pnlGenerate2.setLayout(new GridBagLayout());
       
-      JTextField tfHexFile = new JTextField("crosses.txt");
-      tfHexFile.setColumns(40);
+      JTextField tfHexFile = new JTextField(tfCrossFileName.getText());
+      tfHexFile.setColumns(55);
       tfHexFile.setFont(new Font("Tahoma", Font.PLAIN, 12));
       gbcVals2.gridx = 0;
       gbcVals2.gridy = 0;
       pnlGenerate2.add(tfHexFile,gbcVals2);
       
-      JLabel amountHex = new JLabel("0");
+      JLabel amountHex = new JLabel(lblCrossCount.getText());
       amountHex.setFont(new Font("Dialog", Font.BOLD, 12));
       gbcVals2.gridx = 1;
       gbcVals2.anchor = GridBagConstraints.CENTER;
@@ -125,6 +154,21 @@ public class MainWindow extends JFrame
       pnlGenerate2.add(HexLabel,gbcVals2);
       
       JButton hexLoad = new JButton("Load");
+      hexLoad.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+          try
+          {
+              lblStatus.setText("Status: Excited. Primes have been generated.");
+              updateStats();
+              nameHexWindow.dispose();
+          }
+          catch(NumberFormatException ex)
+          {
+              lblStatus.setText("There is nothing to load, check the file name or the file.");
+              nameHexWindow.dispose();
+          }
+        }
+      });
       gbcVals2.gridx = 0;
       gbcVals2.gridy = 1;
       gbcVals2.anchor = GridBagConstraints.EAST;
@@ -133,6 +177,21 @@ public class MainWindow extends JFrame
       gbcVals2.anchor = GridBagConstraints.WEST;
       
       JButton hexSave = new JButton("Save");
+      hexSave.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+          try
+          {
+              lblStatus.setText("Status: Excited. Primes have been generated.");
+              updateStats();
+              nameHexWindow.dispose();
+          }
+          catch(NumberFormatException ex)
+          {
+              lblStatus.setText("There is nothing to load, check the file name or the file.");
+              nameHexWindow.dispose();
+          }
+        }
+      });
       gbcVals2.gridx = 1;
       gbcVals2.gridy = 1;
       pnlGenerate2.add(hexSave,gbcVals2);
@@ -145,17 +204,48 @@ public class MainWindow extends JFrame
       pnlGenerate3.setLayout(new GridBagLayout());
       
       JButton genPrime = new JButton("Generate Primes");
+      genPrime.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+          try
+          {
+              lblStatus.setText("Status: Excited. Primes have been generated.");
+              updateStats();
+              nameHexWindow.dispose();
+          }
+          catch(NumberFormatException ex)
+          {
+              lblStatus.setText("There is nothing to load, check the file name or the file.");
+              nameHexWindow.dispose();
+          }
+        }
+      });
       gbcVals2.gridx = 0;
       gbcVals2.gridy = 0;
+      gbcVals2.insets = new Insets(0,20,0,0);
       pnlGenerate3.add(genPrime,gbcVals2);
       
-      JLabel largePrime = new JLabel("<html><div style = 'text-align: center;'> The largest prime has 0 digits. <br/> The larges cross has 0 and 0 digits. </html>");
+      JLabel largePrime = new JLabel("<html><div style = 'text-align: center;'> The largest prime has "+lblLargestPrime.getText()+" digits. <br/> The larges cross has "+lblLargestCross.getText()+" and "+lblLargestCross.getText()+" digits. </html>");
       largePrime.setFont(new Font("Tahoma", Font.BOLD, 12));
       gbcVals2.gridx = 1;
       gbcVals2.gridy = 0;
       pnlGenerate3.add(largePrime,gbcVals2);
       
       JButton genCross = new JButton("Generate Crosses");
+      genCross.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+          try
+          {
+              lblStatus.setText("Status: Excited. Primes have been generated.");
+              updateStats();
+              nameHexWindow.dispose();
+          }
+          catch(NumberFormatException ex)
+          {
+              lblStatus.setText("There is nothing to load, check the file name or the file.");
+              nameHexWindow.dispose();
+          }
+        }
+      });
       gbcVals2.gridx = 2;
       gbcVals2.gridy = 0;
       pnlGenerate3.add(genCross,gbcVals2);
@@ -167,8 +257,9 @@ public class MainWindow extends JFrame
       JPanel pnlGenerate4 = new JPanel();
       pnlGenerate4.setLayout(new GridBagLayout());
       
-      JLabel statusBar = new JLabel("Status");
+      JLabel statusBar = new JLabel(lblStatus.getText());
       statusBar.setFont(new Font("Tahoma", Font.PLAIN, 12));
+      gbcVals2.insets = new Insets(0,2,0,0);
       gbcVals2.gridx = 0;
       gbcVals2.gridy = 0;
       pnlGenerate4.add(statusBar,gbcVals2);
